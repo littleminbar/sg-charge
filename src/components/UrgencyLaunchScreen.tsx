@@ -80,7 +80,7 @@ export const UrgencyLaunchScreen: React.FC<UrgencyLaunchScreenProps> = ({
           <button
             type="button"
             onClick={onFindNow}
-            className="group relative w-full py-3 sm:py-3.5 px-4 rounded-2xl bg-[#006948] hover:bg-[#00855d] active:scale-[0.98] transition-all duration-200 text-white font-black shadow-[0_8px_24px_rgba(0,105,72,0.5)] border border-[#85f8c4]/50 cursor-pointer overflow-hidden flex items-center justify-center gap-2 shrink-0"
+            className="group relative w-full min-h-16 px-4 rounded-2xl bg-[#006948] hover:bg-[#00855d] active:scale-[0.98] transition-all duration-200 text-white font-black shadow-[0_8px_24px_rgba(0,105,72,0.5)] border border-[#85f8c4]/50 cursor-pointer overflow-hidden flex items-center justify-center gap-2 shrink-0"
           >
             <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-1000" />
 
@@ -98,7 +98,7 @@ export const UrgencyLaunchScreen: React.FC<UrgencyLaunchScreenProps> = ({
           <button
             type="button"
             onClick={onShowMeAround}
-            className="w-full py-2.5 sm:py-3 px-4 rounded-2xl bg-white/10 hover:bg-white/15 active:scale-[0.98] transition-all duration-200 text-white font-bold border border-white/20 shadow-md cursor-pointer flex flex-col items-center justify-center text-center"
+            className="w-full min-h-14 py-2 px-4 rounded-2xl bg-white/10 hover:bg-white/15 active:scale-[0.98] transition-all duration-200 text-white font-bold border border-white/20 shadow-md cursor-pointer flex flex-col items-center justify-center text-center"
           >
             <div className="flex items-center justify-center gap-2">
               <span className="material-symbols-outlined text-[18px] sm:text-[20px] text-slate-300">

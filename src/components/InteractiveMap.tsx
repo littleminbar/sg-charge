@@ -414,7 +414,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       const stationIcon = L.divIcon({
         className: 'station-marker',
         html: pinHtml,
-        iconSize: [40, 30],
+        iconSize: [48, 40],
         iconAnchor: [20, 28],
       });
 
@@ -523,7 +523,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
       {/* Top Floating Search & Quick Filters (Clean, Uncluttered Strip) */}
       <div className="relative z-10 p-2 sm:p-3.5 flex flex-col gap-1.5 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto w-full pointer-events-none">
         {/* Search Bar */}
-        <div className="h-10 sm:h-11 bg-white/95 backdrop-blur-md rounded-full shadow-md px-3.5 flex items-center justify-between gap-2 border border-slate-200 pointer-events-auto">
+        <div className="h-12 bg-white/95 backdrop-blur-md rounded-full shadow-md px-3.5 flex items-center justify-between gap-2 border border-slate-200 pointer-events-auto">
           <span className="material-symbols-outlined text-[#006948] text-[20px] shrink-0">
             search
           </span>
@@ -532,13 +532,13 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search postal code, mall, street..."
-            className="w-full bg-transparent text-xs text-[#0d1c2f] placeholder-slate-400 focus:outline-none font-medium"
+            className="w-full bg-transparent text-base text-[#0d1c2f] placeholder-slate-400 focus:outline-none font-medium"
           />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery('')}
-              className="w-5 h-5 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer"
+              className="w-11 h-11 -mr-2 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer"
             >
               <span className="material-symbols-outlined text-[15px]">close</span>
             </button>
@@ -546,22 +546,22 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
         </div>
 
         {/* Quick Filter Chips (Horizontal compact scroll, no cluttered status HUD) */}
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5 pointer-events-auto">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 pointer-events-auto">
           <button
             type="button"
             onClick={() => setActiveFilter('all')}
-            className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
+            className={`px-4 min-h-11 rounded-full text-sm font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
               activeFilter === 'all'
                 ? 'bg-[#006948] text-white'
                 : 'bg-white/95 text-slate-700 hover:bg-slate-50 border border-slate-200'
             }`}
           >
-            All ({stations.length})
+            {stations.length === 0 ? 'Loading stations…' : `All (${stations.length})`}
           </button>
           <button
             type="button"
             onClick={() => setActiveFilter('available')}
-            className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
+            className={`px-4 min-h-11 rounded-full text-sm font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
               activeFilter === 'available'
                 ? 'bg-[#006948] text-white'
                 : 'bg-white/95 text-slate-700 hover:bg-slate-50 border border-slate-200'
@@ -572,7 +572,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <button
             type="button"
             onClick={() => setActiveFilter('sp')}
-            className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
+            className={`px-4 min-h-11 rounded-full text-sm font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
               activeFilter === 'sp'
                 ? 'bg-[#006948] text-white'
                 : 'bg-white/95 text-slate-700 hover:bg-slate-50 border border-slate-200'
@@ -583,7 +583,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           <button
             type="button"
             onClick={() => setActiveFilter('cdg')}
-            className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
+            className={`px-4 min-h-11 rounded-full text-sm font-semibold whitespace-nowrap transition-all shadow-sm cursor-pointer ${
               activeFilter === 'cdg'
                 ? 'bg-[#006948] text-white'
                 : 'bg-white/95 text-slate-700 hover:bg-slate-50 border border-slate-200'
@@ -610,7 +610,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           onClick={handleRecenter2km}
           aria-label="Snap to 2km"
           title="Recenter & Snap to 2km Street View"
-          className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-[#4285f4] hover:bg-blue-50 active:scale-95 transition-all border border-slate-200 cursor-pointer"
+          className="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center text-[#4285f4] hover:bg-blue-50 active:scale-95 transition-all border border-slate-200 cursor-pointer"
         >
           <span className={`material-symbols-outlined text-[18px] ${isLocating ? 'animate-spin' : ''}`}>
             my_location
@@ -623,7 +623,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
           onClick={() => setMapType((prev) => (prev === 'roadmap' ? 'satellite' : 'roadmap'))}
           aria-label="Toggle Satellite"
           title="Toggle Google Maps Satellite"
-          className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-[#0d1c2f] hover:bg-slate-50 active:scale-95 transition-all border border-slate-200 cursor-pointer"
+          className="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center text-[#0d1c2f] hover:bg-slate-50 active:scale-95 transition-all border border-slate-200 cursor-pointer"
         >
           <span className="material-symbols-outlined text-[17px]">
             {mapType === 'roadmap' ? 'satellite_alt' : 'map'}
@@ -637,7 +637,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             onClick={() => mapInstanceRef.current?.zoomIn()}
             aria-label="Zoom in"
             title="Zoom In (+)"
-            className="w-9 h-8 flex items-center justify-center text-[#0d1c2f] hover:bg-slate-50 active:scale-95 transition-all border-b border-slate-100 cursor-pointer"
+            className="w-12 h-11 flex items-center justify-center text-[#0d1c2f] hover:bg-slate-50 active:scale-95 transition-all border-b border-slate-100 cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>
           </button>
@@ -646,7 +646,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             onClick={() => mapInstanceRef.current?.zoomOut()}
             aria-label="Zoom out"
             title="Zoom Out (-)"
-            className="w-9 h-8 flex items-center justify-center text-[#0d1c2f] hover:bg-slate-50 active:scale-95 transition-all cursor-pointer"
+            className="w-12 h-11 flex items-center justify-center text-[#0d1c2f] hover:bg-slate-50 active:scale-95 transition-all cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">remove</span>
           </button>
@@ -656,7 +656,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             onClick={handleRecenter2km}
             aria-label="2km Radius View"
             title="Snap to 2km Street View"
-            className="w-9 h-7 flex items-center justify-center text-[#006948] hover:bg-emerald-50 active:scale-95 transition-all text-[9.5px] font-black border-t border-slate-100 cursor-pointer"
+            className="w-12 h-10 flex items-center justify-center text-[#006948] hover:bg-emerald-50 active:scale-95 transition-all text-[9.5px] font-black border-t border-slate-100 cursor-pointer"
           >
             2km
           </button>
@@ -666,7 +666,7 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
             onClick={handleResetSingapore}
             aria-label="Reset Zoom"
             title="Fit Whole Singapore Island"
-            className="w-9 h-7 flex items-center justify-center text-slate-600 hover:bg-slate-50 active:scale-95 transition-all text-[10px] font-bold border-t border-slate-100 cursor-pointer"
+            className="w-12 h-10 flex items-center justify-center text-slate-600 hover:bg-slate-50 active:scale-95 transition-all text-[10px] font-bold border-t border-slate-100 cursor-pointer"
           >
             1x
           </button>
@@ -699,10 +699,10 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
                 <button
                   type="button"
                   onClick={() => onToggleSaveStation(activeCardStation.id)}
-                  className="w-7 h-7 rounded-full flex items-center justify-center text-slate-400 hover:text-red-500 active:scale-95 cursor-pointer shrink-0"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-slate-400 hover:text-red-500 active:scale-95 cursor-pointer shrink-0"
                 >
                   <span
-                    className="material-symbols-outlined text-[18px]"
+                    className="material-symbols-outlined text-[26px]"
                     style={{
                       fontVariationSettings: savedStationIds.includes(activeCardStation.id) ? "'FILL' 1" : "'FILL' 0",
                       color: savedStationIds.includes(activeCardStation.id) ? '#ba1a1a' : undefined,
@@ -734,14 +734,14 @@ export const InteractiveMap: React.FC<InteractiveMapProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenStationDetails(activeCardStation)}
-                  className="py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0d1c2f] text-[11px] font-bold transition-colors cursor-pointer"
+                  className="min-h-12 px-5 rounded-xl bg-slate-100 hover:bg-slate-200 text-[#0d1c2f] text-sm font-bold transition-colors cursor-pointer"
                 >
                   Details
                 </button>
                 <button
                   type="button"
                   onClick={() => onStartNavigation(activeCardStation)}
-                  className="flex-1 py-2.5 px-3 rounded-xl bg-[#006948] hover:bg-[#00855d] text-white text-xs font-black flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-98 cursor-pointer border border-[#85f8c4]/30"
+                  className="flex-1 min-h-12 px-3 rounded-xl bg-[#006948] hover:bg-[#00855d] text-white text-base font-black flex items-center justify-center gap-1.5 transition-all shadow-md active:scale-98 cursor-pointer border border-[#85f8c4]/30"
                 >
                   <span className="material-symbols-outlined text-[17px] text-[#85f8c4]">navigation</span>
                   <span>Navigate</span>

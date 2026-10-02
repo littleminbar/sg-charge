@@ -46,7 +46,7 @@ export const ReviewsModal: React.FC<ReviewsModalProps> = ({ station, onClose }) 
             type="button"
             aria-label="Close"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
+            className="w-11 h-11 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
@@ -109,7 +109,7 @@ export const ReviewsModal: React.FC<ReviewsModalProps> = ({ station, onClose }) 
 
           <button
             type="submit"
-            className="py-2 px-3 rounded-xl bg-[#006948] text-white text-xs font-bold hover:bg-[#00855d] active:scale-95 transition-all self-end cursor-pointer"
+            className="min-h-12 px-5 rounded-xl bg-[#006948] text-white text-sm font-bold hover:bg-[#00855d] active:scale-95 transition-all self-end cursor-pointer"
           >
             Post Check-in
           </button>
