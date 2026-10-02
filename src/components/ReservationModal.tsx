@@ -46,7 +46,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             type="button"
             aria-label="Close"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
+            className="w-11 h-11 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
@@ -102,7 +102,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
             <button
               type="button"
               onClick={handleHold}
-              className="w-full py-3.5 rounded-2xl bg-[#006948] text-white font-bold text-sm shadow-md hover:bg-[#00855d] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full min-h-14 rounded-2xl bg-[#006948] text-white font-bold text-sm shadow-md hover:bg-[#00855d] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <span className="material-symbols-outlined text-[18px]">timer</span>
               <span>Confirm 15-Minute Hold</span>
@@ -130,7 +130,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
               <button
                 type="button"
                 onClick={() => setSecondsLeft((prev) => prev + 300)}
-                className="flex-1 py-2.5 rounded-xl bg-[#dde9ff] text-[#0d1c2f] font-bold text-xs hover:bg-[#d5e3fd]"
+                className="flex-1 min-h-12 rounded-xl bg-[#dde9ff] text-[#0d1c2f] font-bold text-sm hover:bg-[#d5e3fd]"
               >
                 +5 Mins Extension
               </button>
@@ -140,7 +140,7 @@ export const ReservationModal: React.FC<ReservationModalProps> = ({
                   setIsReserved(false);
                   onClose();
                 }}
-                className="flex-1 py-2.5 rounded-xl bg-[#ffdad6] text-[#ba1a1a] font-bold text-xs hover:bg-[#ffb4ab]"
+                className="flex-1 min-h-12 rounded-xl bg-[#ffdad6] text-[#ba1a1a] font-bold text-sm hover:bg-[#ffb4ab]"
               >
                 Cancel Hold
               </button>

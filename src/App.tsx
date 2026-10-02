@@ -95,13 +95,16 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState<'map' | 'saved' | 'activity' | 'profile'>('map');
   const [isDetailsView, setIsDetailsView] = useState<boolean>(false);
 
+  const nearestOf = (list: Station[]) =>
+    list.reduce((a, b) => ((b.distanceKm ?? Infinity) < (a.distanceKm ?? Infinity) ? b : a), list[0]);
+
   // Sync selected station if stations change
   useEffect(() => {
     if (stationsWithRealDistance && stationsWithRealDistance.length > 0) {
       setSelectedStation((prev) => {
-        if (!prev) return stationsWithRealDistance[0];
+        if (!prev) return nearestOf(stationsWithRealDistance);
         const found = stationsWithRealDistance.find((s: Station) => s.id === prev.id);
-        return found || stationsWithRealDistance[0];
+        return found || nearestOf(stationsWithRealDistance);
       });
     }
   }, [stationsWithRealDistance]);
@@ -204,12 +207,12 @@ export default function App() {
     showToast(`Charging started at ${station.name}!`);
   };
 
-  const handleStopCharging = () => {
+  const handleStopCharging = (finalKwh?: number, finalCost?: number) => {
     if (activeSession) {
       const duration = Math.max(1, Math.round((Date.now() - activeSession.startedAt.getTime()) / 60000));
-      const kwh = activeSession.energyDeliveredKwh;
+      const kwh = finalKwh ?? activeSession.energyDeliveredKwh;
       const rate = activeSession.pricePerKwh || 0;
-      const cost = +(kwh * rate).toFixed(2);
+      const cost = finalCost ?? +(kwh * rate).toFixed(2);
 
       const pastItem: PastSession = {
         id: `past-${Date.now()}`,
@@ -238,7 +241,7 @@ export default function App() {
     return (
       <div className="relative w-full h-[100dvh] max-h-[100dvh] overflow-hidden">
         {toastMessage && (
-          <div className="fixed top-4 inset-x-4 z-[200] max-w-sm mx-auto bg-[#0d1c2f] text-white p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in">
+          <div className="pointer-events-none fixed top-4 inset-x-4 z-[200] max-w-sm mx-auto bg-[#0d1c2f] text-white p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in">
             <span className="material-symbols-outlined text-[18px] text-[#85f8c4]">check_circle</span>
             <span className="flex-1">{toastMessage}</span>
           </div>
@@ -252,17 +255,17 @@ export default function App() {
 
         {/* Bottom Strip dynamically matched to dark Launch background */}
         <nav className="fixed bottom-0 inset-x-0 z-30 bg-[#002114]/90 backdrop-blur-md border-t border-white/10 w-full select-none">
-          <div className="flex items-center justify-around py-2 sm:py-2.5 px-3 sm:px-6 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto">
+          <div className="flex items-center justify-around py-1 px-1 sm:px-6 pb-[env(safe-area-inset-bottom)] max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto">
             <button
               type="button"
               onClick={() => {
                 setAppFlowMode('explore');
                 setCurrentTab('map');
               }}
-              className="flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95"
+              className="flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95"
             >
               <span className="material-symbols-outlined text-[24px]">map</span>
-              <span className="text-[11px] font-semibold">Explore</span>
+              <span className="text-xs font-semibold">Explore</span>
             </button>
 
             <button
@@ -271,10 +274,10 @@ export default function App() {
                 setAppFlowMode('explore');
                 setCurrentTab('saved');
               }}
-              className="flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95"
+              className="flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95"
             >
               <span className="material-symbols-outlined text-[24px]">bookmark</span>
-              <span className="text-[11px] font-semibold">Saved</span>
+              <span className="text-xs font-semibold">Saved</span>
             </button>
 
             <button
@@ -283,10 +286,10 @@ export default function App() {
                 setAppFlowMode('explore');
                 setCurrentTab('activity');
               }}
-              className="flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95 relative"
+              className="flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95 relative"
             >
               <span className="material-symbols-outlined text-[24px]">history</span>
-              <span className="text-[11px] font-semibold">Activity</span>
+              <span className="text-xs font-semibold">Activity</span>
               {activeSession && (
                 <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-[#85f8c4] animate-ping" />
               )}
@@ -298,10 +301,10 @@ export default function App() {
                 setAppFlowMode('explore');
                 setCurrentTab('profile');
               }}
-              className="flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95"
+              className="flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer text-slate-300 hover:text-[#85f8c4] active:scale-95"
             >
               <span className="material-symbols-outlined text-[24px]">person</span>
-              <span className="text-[11px] font-semibold">Profile</span>
+              <span className="text-xs font-semibold">Profile</span>
             </button>
           </div>
         </nav>
@@ -314,7 +317,7 @@ export default function App() {
     return (
       <>
         {toastMessage && (
-          <div className="fixed top-4 inset-x-4 z-[200] max-w-sm mx-auto bg-[#0d1c2f] text-white p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in">
+          <div className="pointer-events-none fixed top-4 inset-x-4 z-[200] max-w-sm mx-auto bg-[#0d1c2f] text-white p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in">
             <span className="material-symbols-outlined text-[18px] text-[#85f8c4]">check_circle</span>
             <span className="flex-1">{toastMessage}</span>
           </div>
@@ -366,7 +369,7 @@ export default function App() {
     <div className="h-[100dvh] max-h-[100dvh] overflow-hidden bg-[#f8f9ff] text-[#0d1c2f] flex flex-col justify-between selection:bg-[#85f8c4] selection:text-[#002114]">
       {/* Toast Alert */}
       {toastMessage && (
-        <div className="fixed top-20 inset-x-4 z-[200] max-w-sm mx-auto bg-[#0d1c2f] text-white p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in">
+        <div className="pointer-events-none fixed top-20 inset-x-4 z-[200] max-w-sm mx-auto bg-[#0d1c2f] text-white p-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold animate-in fade-in">
           <span className="material-symbols-outlined text-[18px] text-[#85f8c4]">check_circle</span>
           <span className="flex-1">{toastMessage}</span>
         </div>
@@ -482,11 +485,11 @@ export default function App() {
       {/* Bottom Floating Navigation Dock */}
       {!isDetailsView && (
         <nav className="fixed bottom-0 inset-x-0 z-30 bg-[#f8f9ff]/90 backdrop-blur-md border-t border-[#dde9ff] w-full">
-          <div className="flex items-center justify-around py-2 sm:py-2.5 px-3 sm:px-6 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto">
+          <div className="flex items-center justify-around py-1 px-1 sm:px-6 pb-[env(safe-area-inset-bottom)] max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto">
             <button
               type="button"
               onClick={() => setCurrentTab('map')}
-              className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer ${
+              className={`flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer ${
                 currentTab === 'map'
                   ? 'text-[#006948] font-bold'
                   : 'text-[#3d4a42] hover:text-[#0d1c2f]'
@@ -504,7 +507,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setCurrentTab('saved')}
-              className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer ${
+              className={`flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer ${
                 currentTab === 'saved'
                   ? 'text-[#006948] font-bold'
                   : 'text-[#3d4a42] hover:text-[#0d1c2f]'
@@ -522,7 +525,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setCurrentTab('activity')}
-              className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer relative ${
+              className={`flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer relative ${
                 currentTab === 'activity'
                   ? 'text-[#006948] font-bold'
                   : 'text-[#3d4a42] hover:text-[#0d1c2f]'
@@ -543,7 +546,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setCurrentTab('profile')}
-              className={`flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer ${
+              className={`flex-1 min-h-14 justify-center flex flex-col items-center gap-0.5 py-1 px-3 rounded-xl transition-all cursor-pointer ${
                 currentTab === 'profile'
                   ? 'text-[#006948] font-bold'
                   : 'text-[#3d4a42] hover:text-[#0d1c2f]'

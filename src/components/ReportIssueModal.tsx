@@ -39,7 +39,7 @@ export const ReportIssueModal: React.FC<ReportIssueModalProps> = ({
             type="button"
             aria-label="Close"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
+            className="w-11 h-11 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
@@ -117,7 +117,7 @@ export const ReportIssueModal: React.FC<ReportIssueModalProps> = ({
 
             <button
               type="submit"
-              className="w-full py-3.5 mt-1 rounded-2xl bg-[#006948] text-white font-bold text-sm shadow-md hover:bg-[#00855d] active:scale-[0.99] transition-all cursor-pointer"
+              className="w-full min-h-14 mt-1 rounded-2xl bg-[#006948] text-white font-bold text-sm shadow-md hover:bg-[#00855d] active:scale-[0.99] transition-all cursor-pointer"
             >
               Submit Report to SP Network Ops
             </button>

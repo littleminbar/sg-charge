@@ -94,7 +94,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
         <button
           type="button"
           onClick={onBackToMap}
-          className="inline-flex items-center gap-1.5 text-[#3d4a42] hover:text-[#006948] transition-colors py-1 cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-[#3d4a42] hover:text-[#006948] transition-colors min-h-11 cursor-pointer"
         >
           <span className="material-symbols-outlined text-[20px]">arrow_back</span>
           <span className="font-semibold text-sm">Back to Map</span>
@@ -157,7 +157,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
           <button
             type="button"
             onClick={handleCopyPostal}
-            className="shrink-0 px-2.5 py-1 rounded-lg bg-[#d5e3fd] text-[#0d1c2f] text-xs font-bold active:scale-95 transition-transform flex items-center gap-1 hover:bg-[#cce5ff] cursor-pointer"
+            className="shrink-0 px-3 min-h-11 rounded-lg bg-[#d5e3fd] text-[#0d1c2f] text-sm font-bold active:scale-95 transition-transform flex items-center gap-1 hover:bg-[#cce5ff] cursor-pointer"
           >
             <span className="material-symbols-outlined text-[14px]">content_copy</span>
             <span>Copy</span>
@@ -200,7 +200,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
         <button
           type="button"
           onClick={() => onStartNavigation(station)}
-          className="w-full py-3 px-4 rounded-2xl bg-[#006948] text-white shadow-md shadow-emerald-900/15 flex items-center justify-between active:scale-[0.99] transition-transform hover:bg-[#00855d] cursor-pointer"
+          className="w-full min-h-14 px-4 rounded-2xl bg-[#006948] text-white shadow-md shadow-emerald-900/15 flex items-center justify-between active:scale-[0.99] transition-transform hover:bg-[#00855d] cursor-pointer"
         >
           <div className="flex items-center gap-3 text-left">
             <div className="w-9 h-9 rounded-full bg-[#00855d] flex items-center justify-center text-white">
@@ -219,7 +219,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
           <button
             type="button"
             onClick={onOpenReserveModal}
-            className="py-2.5 px-3 rounded-2xl bg-[#dde9ff] text-[#0d1c2f] text-xs font-bold flex items-center justify-center gap-1.5 active:bg-[#d5e3fd] hover:bg-[#d5e3fd] transition-colors cursor-pointer"
+            className="min-h-12 px-3 rounded-2xl bg-[#dde9ff] text-[#0d1c2f] text-sm font-bold flex items-center justify-center gap-1.5 active:bg-[#d5e3fd] hover:bg-[#d5e3fd] transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[#006398] text-[18px]">lock_clock</span>
             <span>Reserve (15m hold)</span>
@@ -228,7 +228,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
           <button
             type="button"
             onClick={onOpenReportModal}
-            className="py-2.5 px-3 rounded-2xl bg-[#dde9ff] text-[#0d1c2f] text-xs font-bold flex items-center justify-center gap-1.5 active:bg-[#d5e3fd] hover:bg-[#d5e3fd] transition-colors cursor-pointer"
+            className="min-h-12 px-3 rounded-2xl bg-[#dde9ff] text-[#0d1c2f] text-sm font-bold flex items-center justify-center gap-1.5 active:bg-[#d5e3fd] hover:bg-[#d5e3fd] transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[#3d4a42] text-[18px]">flag</span>
             <span>Report Issue</span>
@@ -350,7 +350,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
                       <button
                         type="button"
                         onClick={() => onPlugInToStart(bay)}
-                        className="px-3.5 py-1.5 rounded-xl bg-[#006948] text-white text-xs font-bold active:opacity-90 hover:bg-[#00855d] transition-colors cursor-pointer"
+                        className="px-4 min-h-11 rounded-xl bg-[#006948] text-white text-sm font-bold active:opacity-90 hover:bg-[#00855d] transition-colors cursor-pointer"
                       >
                         Plug In to Start
                       </button>
@@ -571,7 +571,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
         <button
           type="button"
           onClick={onOpenPortSelector}
-          className="px-4 py-3 rounded-2xl bg-[#d5e3fd] text-[#0d1c2f] text-sm font-bold flex items-center gap-1.5 shrink-0 active:scale-95 transition-transform hover:bg-[#cce5ff] cursor-pointer"
+          className="px-4 min-h-14 rounded-2xl bg-[#d5e3fd] text-[#0d1c2f] text-sm font-bold flex items-center gap-1.5 shrink-0 active:scale-95 transition-transform hover:bg-[#cce5ff] cursor-pointer"
         >
           <span className="material-symbols-outlined text-[20px]">tune</span>
           <span>Port</span>
@@ -580,7 +580,7 @@ export const StationDetails: React.FC<StationDetailsProps> = ({
         <button
           type="button"
           onClick={onScanQR}
-          className="flex-1 py-3 px-4 rounded-2xl bg-[#006948] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-900/15 active:scale-[0.99] transition-transform hover:bg-[#00855d] cursor-pointer"
+          className="flex-1 min-h-14 px-4 rounded-2xl bg-[#006948] text-white text-base font-bold flex items-center justify-center gap-2 shadow-md shadow-emerald-900/15 active:scale-[0.99] transition-transform hover:bg-[#00855d] cursor-pointer"
         >
           <span className="material-symbols-outlined text-[22px]">qr_code_scanner</span>
           <span>Scan QR to Charge</span>

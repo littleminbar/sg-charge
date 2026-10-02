@@ -251,7 +251,7 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
               }
             }}
             title={voiceEnabled ? 'Voice Guidance Active (Tap to Mute)' : 'Voice Muted (Tap to Unmute)'}
-            className={`w-8 h-8 rounded-full flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer ${
+            className={`w-11 h-11 rounded-full flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer ${
               voiceEnabled ? 'bg-[#85f8c4] text-[#002114]' : 'bg-white/15 text-slate-300 hover:bg-white/25'
             }`}
           >
@@ -266,7 +266,7 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
               stopSpeaking();
               onClose();
             }}
-            className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white active:scale-95 transition-all shrink-0 cursor-pointer"
+            className="w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white active:scale-95 transition-all shrink-0 cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
@@ -310,7 +310,7 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
           <button
             type="button"
             onClick={() => setStepIndex((prev) => Math.min(prev + 1, steps.length - 1))}
-            className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[10px] font-bold text-white shrink-0 active:scale-95 transition-all cursor-pointer"
+            className="px-3 min-h-11 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-white shrink-0 active:scale-95 transition-all cursor-pointer"
           >
             Next Step →
           </button>
@@ -344,7 +344,7 @@ export const NavigationModal: React.FC<NavigationModalProps> = ({
         <button
           type="button"
           onClick={handleArrivalClick}
-          className="w-full py-2.5 rounded-xl bg-[#85f8c4] text-[#002114] font-black text-xs sm:text-sm shadow-md hover:bg-[#a6ffd6] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
+          className="w-full min-h-14 rounded-xl bg-[#85f8c4] text-[#002114] font-black text-base shadow-md hover:bg-[#a6ffd6] active:scale-[0.99] transition-all flex items-center justify-center gap-2 cursor-pointer mt-1"
         >
           <span className="material-symbols-outlined text-[18px]">bolt</span>
           <span>I Have Arrived at EV Bay (Start Charging)</span>

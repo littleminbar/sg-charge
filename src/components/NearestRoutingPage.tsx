@@ -216,7 +216,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
           <button
             type="button"
             onClick={onBackToUrgency}
-            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold"
+            className="flex items-center gap-1.5 px-4 min-h-11 rounded-full bg-white/10 hover:bg-white/20 text-sm font-semibold"
           >
             <span className="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Back</span>
@@ -233,7 +233,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
           <button
             type="button"
             onClick={onShowExplore}
-            className="mt-3 px-5 py-2 rounded-full bg-[#006948] text-white text-xs font-bold"
+            className="mt-3 px-6 min-h-12 rounded-full bg-[#006948] text-white text-sm font-bold"
           >
             Go to Map
           </button>
@@ -294,7 +294,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
                 }
               }}
               title={voiceEnabled ? 'Voice Guidance Active (Tap to Mute)' : 'Voice Muted (Tap to Unmute)'}
-              className={`w-8 h-8 rounded-full flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer ${
+              className={`w-11 h-11 rounded-full flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer ${
                 voiceEnabled ? 'bg-[#85f8c4] text-[#002114]' : 'bg-white/15 text-slate-300 hover:bg-white/25'
               }`}
             >
@@ -310,7 +310,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
                 setIsLiveNavigating(false);
               }}
               title="Exit Navigation"
-              className="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer"
+              className="w-11 h-11 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer"
             >
               <span className="material-symbols-outlined text-[18px]">close</span>
             </button>
@@ -322,7 +322,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
           <button
             type="button"
             onClick={onBackToUrgency}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-xs font-semibold transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-4 min-h-11 rounded-full bg-white/10 hover:bg-white/20 text-sm font-semibold transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">arrow_back</span>
             <span>Back</span>
@@ -338,7 +338,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
           <button
             type="button"
             onClick={onShowExplore}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#006948] hover:bg-[#00855d] text-xs font-bold text-white transition-colors cursor-pointer"
+            className="flex items-center gap-1 px-4 min-h-11 rounded-full bg-[#006948] hover:bg-[#00855d] text-sm font-bold text-white transition-colors cursor-pointer"
           >
             <span>Map</span>
             <span className="material-symbols-outlined text-[14px]">map</span>
@@ -347,7 +347,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
       )}
 
       {/* Real Google Maps Turn-by-Turn Routing Viewport */}
-      <div className="flex-1 my-1.5 flex flex-col min-h-0 relative rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900">
+      <div className="flex-1 my-1.5 flex flex-col min-h-0 relative isolate z-0 rounded-2xl overflow-hidden shadow-2xl border border-white/15 bg-slate-900">
         <div ref={mapContainerRef} className="w-full h-full" />
 
         {/* Speedometer HUD Floating Top-Left during navigation */}
@@ -373,7 +373,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
           <button
             type="button"
             onClick={() => mapInstanceRef.current?.zoomIn()}
-            className="w-7 h-7 rounded-lg bg-[#0d1c2f]/90 text-white hover:bg-[#006948] flex items-center justify-center shadow-lg border border-white/20 active:scale-95 transition-all cursor-pointer"
+            className="w-11 h-11 rounded-lg bg-[#0d1c2f]/90 text-white hover:bg-[#006948] flex items-center justify-center shadow-lg border border-white/20 active:scale-95 transition-all cursor-pointer"
             title="Zoom In"
           >
             <span className="material-symbols-outlined text-[16px]">add</span>
@@ -381,7 +381,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
           <button
             type="button"
             onClick={() => mapInstanceRef.current?.zoomOut()}
-            className="w-7 h-7 rounded-lg bg-[#0d1c2f]/90 text-white hover:bg-[#006948] flex items-center justify-center shadow-lg border border-white/20 active:scale-95 transition-all cursor-pointer"
+            className="w-11 h-11 rounded-lg bg-[#0d1c2f]/90 text-white hover:bg-[#006948] flex items-center justify-center shadow-lg border border-white/20 active:scale-95 transition-all cursor-pointer"
             title="Zoom Out"
           >
             <span className="material-symbols-outlined text-[16px]">remove</span>
@@ -404,7 +404,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
             <button
               type="button"
               onClick={() => setNavStepIndex((prev) => Math.min(prev + 1, navSteps.length - 1))}
-              className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-[10px] font-bold text-white shrink-0 active:scale-95 transition-all cursor-pointer"
+              className="px-3 min-h-11 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-bold text-white shrink-0 active:scale-95 transition-all cursor-pointer"
             >
               Next Step →
             </button>
@@ -412,7 +412,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
             <button
               type="button"
               onClick={handleStartLiveDrive}
-              className="px-3 py-1 rounded-lg bg-[#1a73e8] hover:bg-[#1557b0] text-white text-[10px] font-black flex items-center gap-1 active:scale-95 transition-all shrink-0 cursor-pointer shadow-md"
+              className="px-4 min-h-11 rounded-lg bg-[#1a73e8] hover:bg-[#1557b0] text-white text-sm font-black flex items-center gap-1 active:scale-95 transition-all shrink-0 cursor-pointer shadow-md"
             >
               <span className="material-symbols-outlined text-[14px]">navigation</span>
               <span>Start Drive</span>
@@ -494,12 +494,12 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
       </div>
 
       {/* Immediate In-App Actions */}
-      <div className="flex flex-col gap-1.5 pt-2 shrink-0">
+      <div className="flex flex-col gap-2 pt-2 shrink-0">
         {isLiveNavigating ? (
           <button
             type="button"
             onClick={() => onStartCharging(bestAvailableBay.code)}
-            className="w-full py-3 rounded-xl bg-[#85f8c4] text-[#002114] font-black text-xs sm:text-sm shadow-lg hover:bg-[#a6ffd6] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full min-h-14 rounded-xl bg-[#85f8c4] text-[#002114] font-black text-base shadow-lg hover:bg-[#a6ffd6] active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">check_circle</span>
             <span>I Have Arrived at EV Bay (Start Charging)</span>
@@ -510,7 +510,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
               <button
                 type="button"
                 onClick={() => onStartCharging(bestAvailableBay.code)}
-                className="w-full py-2.5 rounded-xl bg-[#85f8c4] text-[#002114] font-black text-xs shadow-md hover:bg-[#a6ffd6] active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full min-h-14 rounded-xl bg-[#85f8c4] text-[#002114] font-black text-base shadow-md hover:bg-[#a6ffd6] active:scale-[0.98] transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[16px]">bolt</span>
                 <span>Plug In to Start Bay {bestAvailableBay.code}</span>
@@ -521,7 +521,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
               <button
                 type="button"
                 onClick={handleStartLiveDrive}
-                className="py-2 px-2.5 rounded-xl bg-[#1a73e8] hover:bg-[#1557b0] text-white text-[11px] font-black transition-colors flex items-center justify-center gap-1 cursor-pointer shadow-md"
+                className="min-h-12 px-2.5 rounded-xl bg-[#1a73e8] hover:bg-[#1557b0] text-white text-sm font-black transition-colors flex items-center justify-center gap-1 cursor-pointer shadow-md"
               >
                 <span className="material-symbols-outlined text-[15px]">navigation</span>
                 <span>Start In-App Navigation</span>
@@ -530,7 +530,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
               <button
                 type="button"
                 onClick={onOpenReserveModal}
-                className="py-2 px-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-[11px] font-bold transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                className="min-h-12 px-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white text-sm font-bold transition-colors flex items-center justify-center gap-1 cursor-pointer"
               >
                 <span className="material-symbols-outlined text-[15px] text-[#85f8c4]">lock_clock</span>
                 <span>Reserve (15m Hold)</span>
@@ -540,7 +540,7 @@ export const NearestRoutingPage: React.FC<NearestRoutingPageProps> = ({
             <button
               type="button"
               onClick={onOpenDetails}
-              className="py-1 text-center text-[10px] font-medium text-slate-300 hover:text-white transition-colors cursor-pointer"
+              className="min-h-11 text-center text-xs font-medium text-slate-300 hover:text-white transition-colors cursor-pointer"
             >
               View Full Station Details & Bays →
             </button>

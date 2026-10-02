@@ -52,7 +52,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 'h
             <button
               type="button"
               onClick={() => setShowIOSGuide(false)}
-              className="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:text-white active:scale-95 transition-all cursor-pointer"
+              className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-slate-300 hover:text-white active:scale-95 transition-all cursor-pointer"
             >
               <span className="material-symbols-outlined text-[18px]">close</span>
             </button>
@@ -93,7 +93,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 'h
           <button
             type="button"
             onClick={() => setShowIOSGuide(false)}
-            className="w-full py-2.5 rounded-xl bg-[#006948] hover:bg-[#00855d] active:scale-95 transition-all text-white font-bold text-xs shadow-md cursor-pointer"
+            className="w-full min-h-12 rounded-xl bg-[#006948] hover:bg-[#00855d] active:scale-95 transition-all text-white font-bold text-sm shadow-md cursor-pointer"
           >
             Got it, thanks!
           </button>
@@ -111,14 +111,14 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({ variant = 'h
         title="Install ChargeSG App to Home Screen"
         className={`flex items-center gap-1.5 rounded-full font-bold transition-all shadow-sm active:scale-95 cursor-pointer ${
           isLaunch
-            ? 'px-2.5 py-1 bg-[#85f8c4] text-[#002114] text-[10px] sm:text-xs hover:bg-[#a6ffd6] border border-[#85f8c4]/60'
-            : 'px-2.5 py-1 bg-[#006948] text-white text-[10px] sm:text-xs hover:bg-[#00855d] border border-white/20'
+            ? 'px-4 min-h-11 bg-[#85f8c4] text-[#002114] text-sm hover:bg-[#a6ffd6] border border-[#85f8c4]/60'
+            : 'px-3 min-h-11 min-w-11 justify-center bg-[#006948] text-white text-xs hover:bg-[#00855d] border border-white/20'
         }`}
       >
-        <span className="material-symbols-outlined text-[15px] sm:text-[17px]">
+        <span className="material-symbols-outlined text-[22px]">
           install_mobile
         </span>
-        <span>Install App</span>
+        <span className={isLaunch ? '' : 'hidden min-[480px]:inline'}>Install App</span>
       </button>
 
       {modalContent}

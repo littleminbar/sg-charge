@@ -57,7 +57,7 @@ export const ActivityTab: React.FC<ActivityTabProps> = ({
           <button
             type="button"
             onClick={onOpenActiveSessionModal}
-            className="w-full py-2.5 rounded-xl bg-white text-[#006948] text-xs font-bold hover:bg-emerald-50 transition-colors cursor-pointer"
+            className="w-full min-h-12 rounded-xl bg-white text-[#006948] text-sm font-bold hover:bg-emerald-50 transition-colors cursor-pointer"
           >
             Open Live Telemetry Dashboard
           </button>
@@ -153,7 +153,7 @@ export const ActivityTab: React.FC<ActivityTabProps> = ({
                 type="button"
                 aria-label="Close"
                 onClick={() => setSelectedReceipt(null)}
-                className="w-8 h-8 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42]"
+                className="w-11 h-11 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42]"
               >
                 <span className="material-symbols-outlined text-[18px]">close</span>
               </button>
@@ -189,7 +189,7 @@ export const ActivityTab: React.FC<ActivityTabProps> = ({
             <button
               type="button"
               onClick={() => setSelectedReceipt(null)}
-              className="w-full py-3 rounded-2xl bg-[#006948] text-white text-xs font-bold hover:bg-[#00855d]"
+              className="w-full min-h-12 rounded-2xl bg-[#006948] text-white text-sm font-bold hover:bg-[#00855d]"
             >
               Done
             </button>

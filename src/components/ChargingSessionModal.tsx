@@ -16,6 +16,8 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
   const [energyKwh, setEnergyKwh] = useState(session.energyDeliveredKwh);
   const [powerKw, setPowerKw] = useState(session.currentPowerKw);
   const [secondsElapsed, setSecondsElapsed] = useState(0);
+  const [confirmStop, setConfirmStop] = useState(false);
+  const isDc = session.connectorType.includes('DC') || session.maxPowerKw >= 50;
 
   // Live charging simulation ticker
   useEffect(() => {
@@ -23,10 +25,10 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
       setSecondsElapsed((prev) => prev + 1);
 
       // Add gradual kWh
-      setEnergyKwh((prev) => +(prev + 0.04).toFixed(2));
+      setEnergyKwh((prev) => +(prev + (session.maxPowerKw * 0.95) / 3600).toFixed(3));
 
       // Fluctuate kW slightly realistically around 115-121 kW
-      setPowerKw((prev) => +(118 + (Math.random() * 4 - 2)).toFixed(1));
+      setPowerKw(() => +(session.maxPowerKw * (0.95 + Math.random() * 0.05)).toFixed(1));
 
       // Increment battery percent every few seconds
       setCurrentSoc((prev) => {
@@ -36,7 +38,7 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [session.targetSoc]);
+  }, [session.targetSoc, session.maxPowerKw]);
 
     const rateToUse = session.pricePerKwh ?? (session.connectorType.includes('DC') || session.maxPowerKw >= 50 ? 0.65 : 0.55);
     const costSgd = +(energyKwh * rateToUse).toFixed(2);
@@ -58,7 +60,7 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
             type="button"
             aria-label="Minimize"
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
+            className="w-11 h-11 rounded-full bg-[#eff4ff] flex items-center justify-center text-[#3d4a42] hover:bg-[#dde9ff]"
           >
             <span className="material-symbols-outlined text-[18px]">expand_more</span>
           </button>
@@ -111,7 +113,7 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
               Charging Speed
             </span>
             <span className="text-xl font-black text-[#0d1c2f] mt-1">{powerKw} kW</span>
-            <span className="text-[10px] text-[#3d4a42]">398V • 297A DC</span>
+            <span className="text-[10px] text-[#3d4a42]">{isDc ? 'DC fast' : 'AC'} • {session.voltage ?? (isDc ? 400 : 230)}V • {Math.round((powerKw * 1000) / (session.voltage ?? (isDc ? 400 : 230)))}A</span>
           </div>
 
           <div className="p-3 rounded-2xl bg-[#eff4ff] flex flex-col border border-[#dde9ff]">
@@ -121,7 +123,7 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
               </span>
               Energy Added
             </span>
-            <span className="text-xl font-black text-[#0d1c2f] mt-1">{energyKwh} kWh</span>
+            <span className="text-xl font-black text-[#0d1c2f] mt-1">{energyKwh.toFixed(2)} kWh</span>
             <span className="text-[10px] text-[#006948] font-bold">
               +{(energyKwh * 6.2).toFixed(1)} km range
             </span>
@@ -144,7 +146,7 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
               Estimated Cost
             </span>
             <span className="text-xl font-black text-[#006948] mt-1">
-              S${costSgd}
+              S${costSgd.toFixed(2)}
             </span>
             <span className="text-[10px] text-[#3d4a42] flex items-center gap-1 mt-0.5">
               <span>@ S${rateToUse.toFixed(3)}/kWh</span>
@@ -165,19 +167,38 @@ export const ChargingSessionModal: React.FC<ChargingSessionModalProps> = ({
 
         {/* Action Buttons */}
         <div className="flex flex-col gap-2 pt-1">
-          <button
-            type="button"
-            onClick={() => onStopSession(energyKwh, costSgd)}
-            className="w-full py-3.5 rounded-2xl bg-[#ba1a1a] text-white font-bold text-sm shadow-md active:scale-[0.99] transition-transform hover:bg-[#93000a] flex items-center justify-center gap-2 cursor-pointer"
-          >
-            <span className="material-symbols-outlined text-[20px]">stop_circle</span>
-            <span>Stop Charging & Unplug</span>
-          </button>
+          {confirmStop ? (
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => setConfirmStop(false)}
+                className="flex-1 min-h-14 rounded-2xl bg-[#eff4ff] text-[#0d1c2f] font-bold text-base cursor-pointer"
+              >
+                Keep Charging
+              </button>
+              <button
+                type="button"
+                onClick={() => onStopSession(energyKwh, costSgd)}
+                className="flex-1 min-h-14 rounded-2xl bg-[#ba1a1a] text-white font-bold text-base cursor-pointer"
+              >
+                Yes, Stop
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setConfirmStop(true)}
+              className="w-full min-h-14 rounded-2xl bg-[#ba1a1a] text-white font-bold text-base shadow-md active:scale-[0.99] transition-transform hover:bg-[#93000a] flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[22px]">stop_circle</span>
+              <span>Stop Charging & Unplug</span>
+            </button>
+          )}
 
           <button
             type="button"
             onClick={onClose}
-            className="w-full py-2.5 rounded-2xl bg-[#eff4ff] text-[#0d1c2f] font-semibold text-xs hover:bg-[#dde9ff] transition-colors cursor-pointer"
+            className="w-full min-h-12 rounded-2xl bg-[#eff4ff] text-[#0d1c2f] font-semibold text-sm hover:bg-[#dde9ff] transition-colors cursor-pointer"
           >
             Keep Charging in Background
           </button>

@@ -40,7 +40,7 @@ export const ProfileTab: React.FC = () => {
             value={vehicleModel}
             onChange={(e) => setVehicleModel(e.target.value)}
             placeholder="e.g. BYD Atto 3, Tesla Model Y, Hyundai Ioniq 5"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#006948]"
+            className="w-full px-3 min-h-12 text-base rounded-xl border border-slate-200 focus:outline-none focus:border-[#006948]"
           />
         </div>
 
@@ -53,7 +53,7 @@ export const ProfileTab: React.FC = () => {
             value={carPlate}
             onChange={(e) => setCarPlate(e.target.value.toUpperCase())}
             placeholder="e.g. SNE 1234 A"
-            className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:border-[#006948] uppercase"
+            className="w-full px-3 min-h-12 text-base rounded-xl border border-slate-200 focus:outline-none focus:border-[#006948] uppercase"
           />
         </div>
 
@@ -65,7 +65,7 @@ export const ProfileTab: React.FC = () => {
             <button
               type="button"
               onClick={() => setPreferredPlug('CCS2')}
-              className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
+              className={`min-h-12 px-3 rounded-xl text-sm font-bold border transition-all ${
                 preferredPlug === 'CCS2'
                   ? 'bg-[#006948] text-white border-[#006948]'
                   : 'bg-[#eff4ff] text-[#3d4a42] border-transparent hover:border-slate-300'
@@ -76,7 +76,7 @@ export const ProfileTab: React.FC = () => {
             <button
               type="button"
               onClick={() => setPreferredPlug('Type 2')}
-              className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all ${
+              className={`min-h-12 px-3 rounded-xl text-sm font-bold border transition-all ${
                 preferredPlug === 'Type 2'
                   ? 'bg-[#006948] text-white border-[#006948]'
                   : 'bg-[#eff4ff] text-[#3d4a42] border-transparent hover:border-slate-300'
@@ -96,7 +96,7 @@ export const ProfileTab: React.FC = () => {
 
         <button
           type="submit"
-          className="w-full py-2.5 rounded-xl bg-[#006948] text-white text-xs font-bold hover:bg-[#00855d] transition-colors"
+          className="w-full min-h-12 rounded-xl bg-[#006948] text-white text-sm font-bold hover:bg-[#00855d] transition-colors"
         >
           Save Preferences
         </button>
